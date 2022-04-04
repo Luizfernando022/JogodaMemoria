@@ -3,32 +3,17 @@ const BACK = "card_back"
 const CARD = "card"
 const ICON = "icon"
 
-let techs = 
-["bootstrap",
- "firebase", 
- "mongo",
- "electron",
- "html",
- "css",
- "javascript",
- "react",
- "node",
- "jquery"]
- let cards = null
 
  function startGame(){
-    cards = createCardsWithTechs(techs)
-
-    shuffleCards(cards)
-    console.log(cards)
-    initializeCards(cards)
+    
+    initializeCards(game.createCardsWithTechs())
  
  }
 
  function initializeCards(cards){
    let gameboard = document.getElementById('gameboard')
       
-   cards.forEach((card)=>{
+      cards.forEach((card)=>{
       let cardElement = document.createElement('div')
       cardElement.id = card.id
       cardElement.classList = CARD
@@ -70,40 +55,10 @@ let techs =
 
  startGame()
 
-function createCardsWithTechs(techs){
-   let cards = []
 
-   techs.forEach(tech => {
-      cards.push(createPairWithTech(tech))
-   });
-   return cards.flatMap(pair=>pair)
-}
-
-function createPairWithTech(tech){
-   return [{id:createID(tech),icon:tech,flipped:false},{id:createID(tech),icon:tech,flipped:false}]
-}
-
-function createID(tech){
-return tech + parseInt((Math.random()*1000))
-}
-
-function shuffleCards(cards){
-   let contentIndex = cards.length
-   let randomIndex = 0
-
-   while(contentIndex !== 0){
-      randomIndex = Math.floor(Math.random()*contentIndex)
-      contentIndex--
-
-      [cards[randomIndex],cards[contentIndex]] = [cards[contentIndex],cards[randomIndex]]
-   }
-
-}
 
 function flipCard(){
-this.classList.add('flip')
+   this.classList.add('flip')
+ 
 
-setTimeout(()=>{
-   this.classList = "card"
-},2000)
 }
