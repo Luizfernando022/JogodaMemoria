@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: Righteous,sans-serif;
+    font-size: 25px;
+    background-color: rgb(255, 84, 255);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_front{
+
+    background-color: #101c2f;
+
+    transform: rotateY(180deg);
+
+}
+.card_back{
+    background-color: #782572;
+    color: #101c2f;
+    
+}
+.card_back,.card_front{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 5px rgb(0, 0, 0,0.45);
+    position: absolute;
+    backface-visibility: hidden;
+}
+.card{
+    height: 100px;
+    width: 100px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+}
+
+.flip{
+    transform: rotateY(180deg);
+}
+
+#gameOver{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100%;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: white;
+    flex-direction: column;
+
+}
+#restart{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: lime;
+    border: none;
+    font-weight: 900;
+    border-radius: 10px;
+}
+#gameboard{
+max-width: 700px;
+display: grid;
+grid-template: 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
+gap: 10px;
+}
