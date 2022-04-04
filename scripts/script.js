@@ -1,10 +1,12 @@
 const FRONT = "card_front"
 const BACK = "card_back"
+const CARD = "card"
+const ICON = "icon"
 
 let techs = 
 ["bootstrap",
  "firebase", 
- "mongoDB",
+ "mongo",
  "electron",
  "html",
  "css",
@@ -15,41 +17,93 @@ let techs =
  let cards = null
 
  function startGame(){
-   cards = createCardWithTech(techs)
-   shuffleCards(cards)
-   console.log(cards)
+    cards = createCardsWithTechs(techs)
+
+    shuffleCards(cards)
+    console.log(cards)
+    initializeCards(cards)
+ 
  }
 
- function createCardWithTech(techs){
+ function initializeCards(cards){
+   let gameboard = document.getElementById('gameboard')
+      
+   cards.forEach((card)=>{
+      let cardElement = document.createElement('div')
+      cardElement.id = card.id
+      cardElement.classList = CARD
+      cardElement.dataset.icon = card.icon
+      cardElement.addEventListener('click',flipCard)
+      createCardContent(card,cardElement)
+    
 
-    let cards = []
+      gameboard.appendChild(cardElement)
+   })
 
-     for(let tech of techs){
-        cards.push(createPairWithTech(tech))
-     }
-   
-     return cards.flatMap(pair=>pair)
+
  }
 
+ function createCardContent(card,cardElement){
 
- function createPairWithTech(tech){
-   return [{id:createID(tech),icon:tech,flipped:false},{id:createID(tech),icon:tech,flipped:false}]
+    createCardFace(FRONT,card,cardElement);
+    createCardFace(BACK,card,cardElement);
+
  }
 
- function createID(tech){
-    return tech + parseInt(Math.random()*1000)
- }
+ function createCardFace(face,card,element){
 
- function shuffleCards(cards){
-    let currentIndex = cards.length
-    let randomIndex = 0
+   let cardElementFace = document.createElement('div')
 
-    while(currentIndex !== 0){
-         randomIndex = Math.floor(Math.random()*currentIndex)
-         currentIndex--
+      cardElementFace.classList.add(face)
 
-      [cards[randomIndex],cards[currentIndex]] = [cards[currentIndex],cards[randomIndex]]
-    }
+      if(face === FRONT){
+         let img = document.createElement('img')
+         img.classList = ICON
+         img.src = `./images/${card.icon}.png`
+         cardElementFace.appendChild(img)
+      }else{
+         cardElementFace.innerHTML = " &lt;/&gt;"
+      }
+
+      element.appendChild(cardElementFace)
  }
 
  startGame()
+
+function createCardsWithTechs(techs){
+   let cards = []
+
+   techs.forEach(tech => {
+      cards.push(createPairWithTech(tech))
+   });
+   return cards.flatMap(pair=>pair)
+}
+
+function createPairWithTech(tech){
+   return [{id:createID(tech),icon:tech,flipped:false},{id:createID(tech),icon:tech,flipped:false}]
+}
+
+function createID(tech){
+return tech + parseInt((Math.random()*1000))
+}
+
+function shuffleCards(cards){
+   let contentIndex = cards.length
+   let randomIndex = 0
+
+   while(contentIndex !== 0){
+      randomIndex = Math.floor(Math.random()*contentIndex)
+      contentIndex--
+
+      [cards[randomIndex],cards[contentIndex]] = [cards[contentIndex],cards[randomIndex]]
+   }
+
+}
+
+function flipCard(){
+this.classList.add('flip')
+
+setTimeout(()=>{
+   this.classList = "card"
+},2000)
+}
