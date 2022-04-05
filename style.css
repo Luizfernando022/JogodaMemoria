@@ -97,5 +97,6 @@ gap: 10px;
     #gameOver{
         min-width: 350px;
         height: 100vh;
+        font-size: 10vw;
     }
 }
