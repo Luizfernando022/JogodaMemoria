@@ -1,4 +1,65 @@
 let game = {
+
+  lockMode:false,
+  firstCard:null,
+  secondCard:null,
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  gameover:function(){
+    this.cards.forEach((card)=>{
+      if(card.flipped === true){
+        return true
+      }
+    })
+  },
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  checkFace:function(){
+    if(!this.firstCard || !this.secondCard ){
+      return false
+    }
+    return this.firstCard.icon === this.secondCard.icon
+  },
+
+ // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  unFlipCards:function(){
+    this.firstCard.flipped = false
+    this.secondCard.flipped = false
+    this.clearCards()
+  },
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  clearCards:function(){
+    this.firstCard = null
+    this.secondCard = null
+    this.lockMode = false
+  },
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+  setCard:function(id){
+    let card = this.cards.filter(card=>card.id===id)[0]
+
+    if(card.flipped || this.lockMode){
+      return false
+    }
+    if(!this.firstCard){
+      this.firstCard = card
+      return true
+    }else{
+      this.secondCard = card
+      this.lockMode = true
+      return true
+    }
+
+  },
+
+  // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
   techs: [
     "bootstrap",
     "firebase",
@@ -11,6 +72,7 @@ let game = {
     "node",
     "jquery",
   ],
+
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
   cards: null,
