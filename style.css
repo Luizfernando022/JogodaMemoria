@@ -94,4 +94,7 @@ gap: 10px;
     #gameOver{
         min-width: 350px;
     }
+    img{width:75px
+       height:75px
+    }
 }
