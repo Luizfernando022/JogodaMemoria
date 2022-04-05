@@ -43,19 +43,25 @@ let game = {
 
   setCard:function(id){
     let card = this.cards.filter(card=>card.id===id)[0]
-
     if(card.flipped || this.lockMode){
       return false
     }
     if(!this.firstCard){
       this.firstCard = card
+      this.firstCard.flipped = true
       return true
     }else{
       this.secondCard = card
       this.lockMode = true
+      this.secondCard.flipped = true
       return true
     }
 
+  },
+
+  gameover:function(){
+    return this.cards.filter(card => !card.flipped).length == 0
+    
   },
 
   // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

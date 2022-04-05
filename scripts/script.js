@@ -12,7 +12,7 @@ const ICON = "icon"
 
  function initializeCards(cards){
    let gameboard = document.getElementById('gameboard')
-      
+      gameboard.innerHTML = ''
       cards.forEach((card)=>{
       let cardElement = document.createElement('div')
       cardElement.id = card.id
@@ -58,26 +58,34 @@ const ICON = "icon"
 
 
 function flipCard(){
+  
    if(game.setCard(this.id)){
+      
    this.classList.add('flip')
    if(game.secondCard){
    if(game.checkFace()){
-      game.unFlipCards()
+      game.clearCards()
+      if(game.gameover()){
+         document.getElementById('gameOver').style.display = "flex"
+      }
+      
    }else{
       setTimeout(()=>{
       let firstCardView = document.getElementById(game.firstCard.id)
       let secondCardView = document.getElementById(game.secondCard.id)
       firstCardView.classList.remove('flip')
       secondCardView.classList.remove('flip')
-      game.clearCards()
+      game.unFlipCards()
    },1000)
 }
    }
-   if(game.gameover()){
-      let gameover = document.getElementById('gameOver')
-      gameover.style.display = "flex"
-   }
 
 }
 
+}
+
+function restart(){
+   game.clearCards()
+   startGame()
+   document.getElementById('gameOver').style.display = "none"
 }
