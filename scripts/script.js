@@ -84,6 +84,20 @@ function flipCard(){
 
 }
 
+function initializeCubicsAnimation(){
+   let body = document.getElementsByTagName('body')[0]
+   for(let i = 0;i < 10;i++){
+      let cubo = document.createElement('div')
+      let randomWidth = Math.floor(Math.random()*(120 - 20) -20)
+      console.log(randomWidth)
+      cubo.classList.add('cubo')
+      body.appendChild(cubo)
+      // cubo
+   }
+
+}
+initializeCubicsAnimation()
+
 function restart(){
    game.clearCards()
    startGame()
