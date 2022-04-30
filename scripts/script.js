@@ -88,11 +88,23 @@ function initializeCubicsAnimation(){
    let body = document.getElementsByTagName('body')[0]
    for(let i = 0;i < 10;i++){
       let cubo = document.createElement('div')
-      let randomWidth = Math.floor(Math.random()*(120 - 20) -20)
-      console.log(randomWidth)
-      cubo.classList.add('cubo')
-      body.appendChild(cubo)
-      // cubo
+
+      let random = (min,max)=>parseInt(Math.random()*(max - min) + min)
+
+      let randomSize = random(20,120)
+      let randomPosition = random(1,99)
+      let randomDelay = random(0.1,5)
+      let randomDuration = random(5,10)
+
+         cubo.classList.add('cubo')
+         cubo.style.width = `${randomSize}px`
+         cubo.style.height = `${randomSize}px`
+         cubo.style.bottom = `-${randomSize}px`
+         cubo.style.left = `${randomPosition}%`
+         cubo.style.animationDelay = `${randomDelay}s`
+         cubo.style.animationDuration = `${randomDuration}s`
+
+         body.appendChild(cubo)
    }
 
 }

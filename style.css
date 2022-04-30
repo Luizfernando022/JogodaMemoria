@@ -6,14 +6,15 @@
 body{
     font-family: Righteous,sans-serif;
     font-size: 25px;
-    /* background-image:linear-gradient(45deg,black,black,black,rgb(16, 16 , 16),rgb(16, 16 , 16),black,black,black); */
+    background-image:linear-gradient(45deg,black,black,black,rgb(16, 16 , 16),rgb(16, 16 , 16),black,black,black);
     background-size: 400%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* animation: bg-animation 20s infinite ease-in-out;
-    animation-fill-mode: forwards; */
+    animation: bg-animation 20s infinite ease-in-out;
+    animation-fill-mode: forwards;
+    overflow: hidden;
 }
 
 @keyframes bg-animation{
@@ -71,6 +72,7 @@ body{
     font-size: 50px;
     color: white;
     flex-direction: column;
+    z-index: 7px;
 }
 #restart{
     margin-top: 20px;
@@ -87,6 +89,7 @@ max-width: 700px;
 display: grid;
 grid-template: 1fr 1fr 1fr 1fr 1fr/ 1fr 1fr 1fr 1fr;
 gap: 10px;  
+z-index: 5px;
 }
 img{
     width: 75px;
@@ -94,16 +97,20 @@ img{
 }
 
 .cubo{
-    width: 40px;
-    height: 40px;
-    /* background-color: rgba(255, 255, 255, 0.198); */
-    background-color: rgba(0, 0, 0, 0.342);
+
+    background-color: gray;
     position: absolute;
-    bottom:0px;
-    left:0px
+    animation: up;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    z-index: -2;
+
 }
-@keyframes cubicAnimation { 
-  
+@keyframes up { 
+  0%{transform: translateY(0px); opacity: 0.9;}
+  50%{opacity: 0.7;}
+  100%{transform: translateY(-120vh) rotate(500deg); opacity: 0.1; }
     
 }
 
