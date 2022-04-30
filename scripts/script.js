@@ -86,23 +86,24 @@ function flipCard(){
 
 function initializeCubicsAnimation(){
    let body = document.getElementsByTagName('body')[0]
-   for(let i = 0;i < 10;i++){
+   for(let i = 0;i < 25;i++){
       let cubo = document.createElement('div')
 
       let random = (min,max)=>parseInt(Math.random()*(max - min) + min)
 
-      let randomSize = random(20,120)
-      let randomPosition = random(1,99)
+      let randomSize = random(10,50)
+      let randomPosition = random(10,90)
       let randomDelay = random(0.1,5)
       let randomDuration = random(5,10)
 
          cubo.classList.add('cubo')
          cubo.style.width = `${randomSize}px`
          cubo.style.height = `${randomSize}px`
-         cubo.style.bottom = `-${randomSize}px`
+         cubo.style.bottom = `-30vh`
          cubo.style.left = `${randomPosition}%`
          cubo.style.animationDelay = `${randomDelay}s`
          cubo.style.animationDuration = `${randomDuration}s`
+         cubo.style.animationTimingFunction = `cubic-bezier(${Math.random()*1},${Math.random()*1},${Math.random()*1},${Math.random()*1})`
 
          body.appendChild(cubo)
    }
