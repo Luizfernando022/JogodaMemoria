@@ -116,3 +116,6 @@ function restart(){
    startGame()
    document.getElementById('gameOver').style.display = "none"
 }
+
+
+
